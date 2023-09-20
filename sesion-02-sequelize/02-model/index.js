@@ -1,12 +1,17 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
 const sequelize = new Sequelize({
+	dialect: "sqlite",
+	storage: "./example.db",
+});
+
+/*const sequelize = new Sequelize({
 	dialect: "mysql",
 	host: "localhost",
 	username: "root",
 	password: "root",
 	database: "sequelize_example",
-});
+});*/
 
 async function connect() {
 	try {
@@ -25,7 +30,8 @@ connect();
     id INTEGER PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    views INTEGER 
+    views INTEGER DEFAULT 0 NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE NOT NULL
   );
 */
 
@@ -37,18 +43,26 @@ const Task = sequelize.define("tasks", {
 		allowNull: false,
 	},
 	description: {
-		type: DataTypes.STRING(),
+		type: DataTypes.STRING,
 		allowNull: false,
 	},
 	views: {
 		type: DataTypes.INTEGER,
 		defaultValue: 0,
+		allowNull: false,
+	},
+	isActive: {
+		field: "is_active",
+		type: DataTypes.BOOLEAN,
+		defaultValue: true,
+		allowNull: false,
 	},
 });
 
 async function sync() {
 	try {
-		await sequelize.sync();
+		// Crea/actualiza las tablas dentro de la base de datos
+		await sequelize.sync({ force: true });
 		console.log("> Base de datos actualizada!");
 	} catch (e) {
 		console.error("> No se puede actualizar la base de datos");
