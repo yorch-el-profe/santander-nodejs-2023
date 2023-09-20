@@ -5,11 +5,11 @@ const app = express();
 
 app.use(express.json());
 
-const articleRouter = require("./routers/article");
+const postRouter = require("./routers/post");
 const userRouter = require("./routers/user");
 const commentRouter = require("./routers/comment");
 
-app.use(articleRouter);
+app.use(postRouter);
 app.use(userRouter);
 app.use(commentRouter);
 
