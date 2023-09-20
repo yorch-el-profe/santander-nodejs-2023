@@ -1,17 +1,17 @@
 const { Sequelize, DataTypes } = require("sequelize");
 
-const sequelize = new Sequelize({
+/*const sequelize = new Sequelize({
 	dialect: "sqlite",
 	storage: "./example.db",
-});
+});*/
 
-/*const sequelize = new Sequelize({
+const sequelize = new Sequelize({
 	dialect: "mysql",
 	host: "localhost",
 	username: "root",
 	password: "root",
 	database: "sequelize_example",
-});*/
+});
 
 async function connect() {
 	try {
@@ -37,27 +37,71 @@ connect();
 
 // El id se omite ya que sequelize lo crea
 
-const Task = sequelize.define("tasks", {
-	name: {
-		type: DataTypes.STRING(100),
-		allowNull: false,
+const Task = sequelize.define(
+	"tasks",
+	{
+		name: {
+			type: DataTypes.STRING(100),
+			allowNull: false,
+		},
+		description: {
+			type: DataTypes.STRING,
+			allowNull: false,
+		},
+		views: {
+			type: DataTypes.INTEGER,
+			defaultValue: 0,
+			allowNull: false,
+		},
+		isActive: {
+			field: "is_active",
+			type: DataTypes.BOOLEAN,
+			defaultValue: true,
+			allowNull: false,
+		},
 	},
-	description: {
-		type: DataTypes.STRING,
-		allowNull: false,
+	{
+		timestamps: false,
+	}
+);
+
+/*
+  CREATE TABLE users (
+    id INTEGER PRIMARY KEY,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(20) NOT NULL
+  )
+*/
+const User = sequelize.define(
+	"users",
+	{
+		username: {
+			type: DataTypes.STRING(100),
+			allowNull: false,
+			unique: true,
+		},
+		password: {
+			type: DataTypes.STRING(20),
+			allowNull: false,
+		},
 	},
-	views: {
-		type: DataTypes.INTEGER,
-		defaultValue: 0,
-		allowNull: false,
-	},
-	isActive: {
-		field: "is_active",
-		type: DataTypes.BOOLEAN,
-		defaultValue: true,
-		allowNull: false,
-	},
-});
+	{
+		timestamps: false,
+	}
+);
+
+// En la tabla "tasks" se va agregar una llave
+// foránea de la tabla "users"
+
+// Relación uno a muchos
+// "Un usuario puede crear varias tareas"
+User.hasMany(Task);
+Task.belongsTo(User);
+
+// Relación muchos a muchos
+// "Muchos usuarios pueden estar asignados a muchas tareas"
+User.belongsToMany(Task, { through: "assignments", timestamps: false });
+Task.belongsToMany(User, { through: "assignments", timestamps: false });
 
 async function sync() {
 	try {
