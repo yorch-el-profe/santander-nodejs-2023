@@ -1,5 +1,5 @@
 const User = require("../models/user");
 
-exports.createUser = function (data) {
+exports.insert = function (data) {
 	return User.create(data);
 };
