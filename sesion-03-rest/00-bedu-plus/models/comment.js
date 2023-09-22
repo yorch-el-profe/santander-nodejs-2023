@@ -14,7 +14,8 @@ module.exports = sequelize.define("comments", {
 		allowNull: false,
 		defaultValue: 0,
 	},
-	is_active: {
+	isActive: {
+		field: "is_active",
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
 		defaultValue: true,

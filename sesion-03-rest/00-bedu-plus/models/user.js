@@ -19,7 +19,8 @@ module.exports = sequelize.define("users", {
 			len: [8, 50],
 		},
 	},
-	is_active: {
+	isActive: {
+		field: "is_active",
 		type: DataTypes.BOOLEAN,
 		allowNull: false,
 		defaultValue: true,
