@@ -8,20 +8,20 @@ const {
 
 exports.getPosts = async function (request, response) {
 	const posts = await findAll();
-	response.json(posts);
+	response.status(200).json(posts);
 };
 
 exports.getPost = async function (request, response) {
 	const { id } = request.params;
 	const post = await findById(id);
-	response.json(post);
+	response.status(200).json(post);
 };
 
 exports.createPost = async function (request, response) {
 	const { content } = request.body;
 	// TODO: Implementar el userId del token JWT
 	const post = await insert({ content, userId: 1 });
-	response.json(post);
+	response.status(201).json(post);
 };
 
 exports.updatePost = async function (request, response) {
@@ -29,11 +29,11 @@ exports.updatePost = async function (request, response) {
 	const { id } = request.params;
 
 	await update(id, { content });
-	response.send("Publicación actualizada");
+	response.status(204).end();
 };
 
 exports.deletePost = async function (request, response) {
 	const { id } = request.params;
 	await deleteById(id);
-	response.send("Publicacion borrada");
+	response.status(204).end();
 };

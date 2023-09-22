@@ -8,10 +8,10 @@ const {
 	updatePost,
 } = require("../controllers/post");
 
-router.get("/getPosts", getPosts);
-router.get("/getPost/:id", getPost);
-router.get("/createPost", createPost);
-router.get("/updatePost/:id", updatePost);
-router.get("/deletePost/:id", deletePost);
+router.get("/posts", getPosts);
+router.get("/posts/:id", getPost);
+router.post("/posts", createPost);
+router.put("/posts/:id", updatePost);
+router.delete("/posts/:id", deletePost);
 
 module.exports = router;
