@@ -7,11 +7,27 @@ const {
 	deletePost,
 	updatePost,
 } = require("../controllers/post");
+const validator = require("../middlewares/validator");
+const {
+	createPostSchema,
+	updatePostSchema,
+	paramsSchema,
+} = require("../validations/post");
 
 router.get("/posts", getPosts);
-router.get("/posts/:id", getPost);
-router.post("/posts", createPost);
-router.put("/posts/:id", updatePost);
-router.delete("/posts/:id", deletePost);
+router.get("/posts/:id", validator.params(paramsSchema), getPost);
+router.post(
+	"/posts",
+	validator.params(paramsSchema),
+	validator.body(createPostSchema),
+	createPost
+);
+router.put(
+	"/posts/:id",
+	validator.params(paramsSchema),
+	validator.body(updatePostSchema),
+	updatePost
+);
+router.delete("/posts/:id", validator.params(paramsSchema), deletePost);
 
 module.exports = router;
