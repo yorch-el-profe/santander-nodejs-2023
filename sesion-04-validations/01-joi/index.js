@@ -39,9 +39,43 @@ const schema = Joi.object({
 
 // abortEarly: false -> Muestra todos los errores
 let result = schema.validate(person, { abortEarly: false });
-console.log(result);
+console.log("Validaciones de person", result);
 
 // convert: false -> Impide que los datos se conviertan de acuerdo a
 // ciertas validaciones (por ejemplo uppercase)
 result = schema.validate(person2, { abortEarly: false, convert: false });
-console.log(result.error);
+console.log("Validaciones de person2", result.error);
+
+const person3 = {
+	name: "David",
+	addresses: [
+		{
+			street: "jhdkasdh",
+			int: 2,
+			ext: 400,
+		},
+		{
+			fullAddress: "Calz. Ermita 133 int. 5",
+		},
+		{
+			fullAddress: "jhasdkjhasdkjhasdkjhasdkjh",
+		},
+	],
+};
+
+const complexSchema = Joi.object({
+	name: Joi.string().required(),
+	addresses: Joi.array().items(
+		Joi.object({
+			street: Joi.string().required(),
+			int: Joi.number(),
+			ext: Joi.number(),
+		}),
+		Joi.object({
+			fullAddress: Joi.string().required(),
+		})
+	),
+});
+
+result = complexSchema.validate(person3);
+console.log("Validaciones de person3", result.error);
