@@ -16,12 +16,7 @@ const {
 
 router.get("/posts", getPosts);
 router.get("/posts/:id", validator.params(paramsSchema), getPost);
-router.post(
-	"/posts",
-	validator.params(paramsSchema),
-	validator.body(createPostSchema),
-	createPost
-);
+router.post("/posts", validator.body(createPostSchema), createPost);
 router.put(
 	"/posts/:id",
 	validator.params(paramsSchema),
