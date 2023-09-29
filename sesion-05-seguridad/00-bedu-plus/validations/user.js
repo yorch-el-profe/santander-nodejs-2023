@@ -9,3 +9,8 @@ exports.createUserSchema = Joi.object({
 	email: Joi.string().max(100).email().required(),
 	password: Joi.string().min(8).max(50).required(),
 });
+
+exports.loginSchema = Joi.object({
+	username: Joi.string().min(5).max(50).required(),
+	password: Joi.string().min(8).max(50).required(),
+});

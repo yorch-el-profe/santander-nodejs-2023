@@ -11,6 +11,7 @@ app.use(express.json());
 const postRouter = require("./routers/post");
 const userRouter = require("./routers/user");
 const commentRouter = require("./routers/comment");
+const authRouter = require("./routers/auth");
 
 const validationError = require("./middlewares/validation-error");
 const unknownError = require("./middlewares/unknown-error");
@@ -19,6 +20,7 @@ const unknownError = require("./middlewares/unknown-error");
 app.use(postRouter);
 app.use(userRouter);
 app.use(commentRouter);
+app.use(authRouter);
 
 // Manejo de errores
 app.use(validationError);
