@@ -2,10 +2,6 @@ const express = require("express");
 const app = express();
 const jwt = require("jsonwebtoken");
 
-// El único trabajo de passport es validar el token de JWT
-const passport = require("passport");
-const { Strategy, ExtractJwt } = require("passport-jwt");
-
 const JWT_SECRET = "ssshhhh!!!";
 const db = {
 	id: 1,
@@ -13,29 +9,12 @@ const db = {
 	password: "123123123",
 };
 
-passport.use(
-	new Strategy(
-		{
-			secretOrKey: JWT_SECRET,
-			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-		},
-		function (payload, done) {
-			console.log("Convirtiendo el payload");
-			done(null, db);
-		}
-	)
-);
-
 app.use(express.json());
 
-app.get(
-	"/protegida",
-	passport.authenticate("jwt", { session: false }),
-	function (request, response) {
-		console.log(request.user);
-		response.send("Sólo usuarios con sesión pueden ver esto");
-	}
-);
+app.get("/protegida", function (request, response) {
+	console.log(request.user);
+	response.send("Sólo usuarios con sesión pueden ver esto");
+});
 
 app.get("/publica", function (request, response) {
 	response.send("Cualquiera puede ver esta ruta :D");
