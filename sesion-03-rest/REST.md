@@ -18,7 +18,7 @@ Caso de error:
 * 404 - NOT FOUND: No se encontró el recursos solicitado.
 * 500 - INTERNAL SERVER ERROR: Errores desconocidos.
 
-3. Las peticiones deben contener todo lo necesario para ejecutarse. La idea es que no exista un estado, es decir, no se deban hacer 2 o más peticiones para realizar una acción.
+3. Las peticiones deben contener todo lo necesario para ejecutarse (es decir, stateless). La idea es que no exista un estado, es decir, no se deban hacer 2 o más peticiones para realizar una acción.
 
 4. En el nombrado de las rutas se deben usar pronombres en vez de verbos (de preferencia en plural).
 
