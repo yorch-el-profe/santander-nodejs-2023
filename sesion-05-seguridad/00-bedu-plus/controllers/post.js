@@ -19,8 +19,7 @@ exports.getPost = async function (request, response) {
 
 exports.createPost = async function (request, response) {
 	const { title, content } = request.body;
-	// TODO: Implementar el userId del token JWT
-	const post = await insert({ title, content, userId: 1 });
+	const post = await insert({ title, content, userId: request.user.id });
 	response.status(201).json(post);
 };
 

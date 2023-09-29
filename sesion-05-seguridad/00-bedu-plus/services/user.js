@@ -12,3 +12,8 @@ exports.findByUsername = function (username) {
 		},
 	});
 };
+
+exports.findById = function (id) {
+	// SELECT * FROM users WHERE id = '...';
+	return User.findByPk(id);
+};
