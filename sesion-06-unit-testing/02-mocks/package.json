@@ -1,0 +1,27 @@
+{
+	"name": "02-mocks",
+	"version": "1.0.0",
+	"description": "",
+	"main": "convert-to-objects.js",
+	"scripts": {
+		"test": "jest",
+		"test:coverage": "jest --coverage"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/jest": "^29.5.5",
+		"jest": "^29.7.0"
+	},
+	"jest": {
+		"coverageThreshold": {
+			"global": {
+				"statements": 100,
+				"branches": 100,
+				"functions": 100,
+				"lines": 100
+			}
+		}
+	}
+}

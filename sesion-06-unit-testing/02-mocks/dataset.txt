@@ -1,0 +1,3 @@
+1000|Jorge|31|jorge@bedu.org
+1001|Hector|25|hector@bedu.org
+1002|Luis|24|luis@bedu.org
