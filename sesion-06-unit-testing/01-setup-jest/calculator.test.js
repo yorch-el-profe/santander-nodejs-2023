@@ -14,8 +14,7 @@
  * Assert: Comprobar los resultados esperados
  */
 
-const { it } = require("node:test");
-const { sum, sub, mult } = require("./calculator");
+const { sum, sub, mult, div } = require("./calculator");
 
 describe("Calculator Test", () => {
 	describe("sum() test", () => {
@@ -53,5 +52,22 @@ describe("Calculator Test", () => {
 		});
 	});
 
-	describe("div() test", () => {});
+	describe("div() test", () => {
+		it("should return the same number if b = 1", () => {
+			const random = Math.floor(Math.random() * 1000000);
+			const result = div(random, 1);
+
+			expect(result).toBe(random);
+		});
+
+		it("should throw an error if b = 0", () => {
+			const random = Math.floor(Math.random() * 1000000);
+
+			// La función anónima "protege" la invocación
+			// a la función que lanza un error
+			expect(() => div(random, 0)).toThrowError(
+				"La división por cero es inválida"
+			);
+		});
+	});
 });
