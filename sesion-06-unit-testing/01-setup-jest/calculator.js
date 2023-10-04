@@ -1,8 +1,4 @@
 exports.sum = function (a, b) {
-	if (isNaN(a) || isNaN(b)) {
-		throw new Error("Invalid paremerts");
-	}
-
 	return a + b;
 };
 
