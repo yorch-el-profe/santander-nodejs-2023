@@ -1,0 +1,5 @@
+{
+  "devDependencies": {
+    "sqlite3": "^5.1.6"
+  }
+}
