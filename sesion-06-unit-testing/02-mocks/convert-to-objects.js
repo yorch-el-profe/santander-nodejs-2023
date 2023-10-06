@@ -1,10 +1,19 @@
-const fs = require("fs/promises");
+const { readFile } = require("fs/promises");
 
 async function convertToObjects() {
-	const text = await fs.readFile("./dataset.txt", "utf-8");
+	const text = await readFile("./dataset.txt", "utf-8");
+
+	if (!text.length) {
+		return [];
+	}
 
 	// La manera chafa (Junior)
-	const lines = text.split("\n");
+	const lines = text
+		.trim()
+		.split("\n")
+		.map((line) => line.trim())
+		.filter((line) => line.length > 0);
+
 	const result = [];
 
 	for (let i = 0; i < lines.length; i++) {
