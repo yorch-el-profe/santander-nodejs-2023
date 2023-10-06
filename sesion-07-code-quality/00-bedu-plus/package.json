@@ -26,6 +26,12 @@
 		"@types/jest": "^29.5.5",
 		"jest": "^29.7.0",
 		"nodemon": "^3.0.1",
-		"sqlite3": "^5.1.6"
+		"sqlite3": "^5.1.6",
+		"supertest": "^6.3.3"
+	},
+	"jest": {
+		"setupFiles": [
+			"./test/environment.js"
+		]
 	}
 }
